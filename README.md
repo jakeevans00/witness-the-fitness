@@ -1,6 +1,6 @@
-# slamplify
+# witness the fitness
 
-### lift, log, level up. witness the fitness
+### lift & chow. ooga booga
 
 A workout app built for people who are sick of hitting paywalls.
 
