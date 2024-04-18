@@ -1,3 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.login-bg {
+  background: url(/public/login.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+#links a.active {
+  color: white;
+  background-color: #f97316;
+}
+#links a.active:hover {
+  background-color: #f77e28;
+  color: white;
+}
+
+#links a:hover {
+  color: #f97316;
+}

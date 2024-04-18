@@ -1,22 +1,30 @@
-import Auth from "./Auth";
-import Header from "./Header";
+import { Routes, Route } from "react-router-dom";
+import Login from "./pages/Login";
+
+import { ProtectedRoute } from "./components/ProtectedRoute";
+import { AuthProvider } from "./hooks/useAuth";
+import Dashboard from "./pages/Dashboard";
 
 function App() {
   return (
-    <>
-      <div
-        className="flex h-screen gap-4 justify-between flex-col items-center bg-slate-800"
-        style={{
-          backgroundImage: "url(" + "/login.jpg" + ")",
-          backgroundPosition: "center",
-          backgroundSize: "cover",
-          backgroundRepeat: "no-repeat",
-        }}
-      >
-        <Header />
-        <Auth />
-      </div>
-    </>
+    <AuthProvider>
+      <Routes>
+        <Route path="/" element={<h1>Home</h1>} />
+        <Route path="/login" element={<Login />} />
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        >
+          <Route path="overview" element={<h1>Home</h1>} />
+          <Route path="workout" element={<h1>Workout</h1>} />
+          <Route path="progress" element={<h1>Progress</h1>} />
+        </Route>
+      </Routes>
+    </AuthProvider>
   );
 }
 
