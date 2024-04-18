@@ -60,11 +60,12 @@ export default function Workout() {
             </div>
           </div>
           <div className="flex justify-center">
-            <div className="cursor-pointer bg-gradient-to-r from-orange-500 to-red-300 rounded-xl py-8 px-6 text-white w-1/3 text-center">
-              <Link to="/dashboard/1" className="font-bold">
-                Start a Workout
-              </Link>
-            </div>
+            <Link
+              to="/dashboard/1"
+              className="cursor-pointer bg-gradient-to-r from-orange-500 to-red-300 rounded-xl py-8 px-6 text-white w-1/3 text-center font-bold"
+            >
+              Start a Workout
+            </Link>
           </div>
           <div className="flex">
             <div className="w-1/2">
