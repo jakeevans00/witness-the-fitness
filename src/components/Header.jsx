@@ -1,13 +1,16 @@
 import SearchBar from "../components/SearchBar";
+import { useAuth } from "../hooks/useAuth";
 
 export default function Header() {
+  const { user } = useAuth();
+
   const date = new Date().toLocaleDateString();
   return (
     <>
-      <header className="h-24 w-full flex justify-between items-center px-6 border-solid border-b-2 border-gray-300">
+      <header className="h-24 w-full flex justify-between items-center px-6 border-solid border-b-2 border-gray-300 bg-white">
         <div>
           <p className="text-sm text-gray-500">Today: {date}</p>
-          <h3 className="text-gray-800">Welcome Back!</h3>
+          <h3 className="text-gray-800">Welcome {user.record.username}!</h3>
         </div>
         <SearchBar />
         <div>

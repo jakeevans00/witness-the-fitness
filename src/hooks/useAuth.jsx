@@ -7,28 +7,56 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useLocalStorage("user", null);
-  const [isLoading, setLoading] = useState(false);
+  const [, setLoading] = useState(false);
   const [dummy, setDummy] = useState(false);
 
   const navigate = useNavigate();
 
-  // call this function when you want to authenticate the user
   async function login({ email, password }) {
     setLoading(true);
+    console.log("called login");
 
     try {
       const authData = await pb
         .collection("users")
         .authWithPassword(email, password);
       setUser(authData);
-      console.log(authData);
+      navigate("/");
     } catch (error) {
       alert(error);
     }
     setLoading(false);
   }
 
-  // call this function to sign out logged in user
+  async function signup({ username, age, weight, email, password }) {
+    setLoading(true);
+    console.log("in signup");
+    console.log(username, age, weight, email, password);
+    try {
+      const user = await pb.collection("users").create({
+        username,
+        age,
+        weight,
+        email,
+        emailVisibility: true,
+        password,
+        passwordConfirm: password,
+      });
+      try {
+        const authData = await pb
+          .collection("users")
+          .authWithPassword(email, password);
+        setUser(authData);
+      } catch (error) {
+        alert(error);
+      }
+      navigate("/");
+    } catch (error) {
+      alert(error);
+    }
+    setLoading(false);
+  }
+
   const logout = () => {
     pb.authStore.clear();
     setDummy(!dummy);
@@ -39,6 +67,7 @@ export const AuthProvider = ({ children }) => {
     () => ({
       user,
       login,
+      signup,
       logout,
     }),
     [user]

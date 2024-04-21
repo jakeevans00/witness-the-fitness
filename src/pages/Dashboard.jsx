@@ -4,11 +4,11 @@ import Header from "../components/Header";
 
 export default function Dashboard() {
   return (
-    <div className="h-screen w-full flex">
+    <div className="h-dvh w-full flex">
       <Sidebar />
-      <div className="w-full">
+      <div className="w-full bg-gray-100">
         <Header />
-        <div className="bg-gray-100 h-full p-6">
+        <div className="p-6">
           <Outlet />
         </div>
       </div>

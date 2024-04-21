@@ -1,24 +1,26 @@
 import pb from "../lib/pocketbase";
 import { useForm } from "react-hook-form";
-import useLogin from "../hooks/useLogin";
+import { useAuth } from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 
 export default function Auth() {
   const navigate = useNavigate();
   const { register, handleSubmit, reset } = useForm();
 
-  const { login, isLoading } = useLogin();
+  const { login } = useAuth();
 
   const isLoggedin = pb.authStore.isValid;
+  console.log(isLoggedin);
 
   async function onSubmit(data) {
     login({ email: data.email, password: data.password });
     reset();
   }
 
-  if (isLoggedin) {
-    navigate("/dashboard/overview");
+  async function signup() {
+    navigate("/signup");
   }
+
   return (
     <>
       <div className="h-screen login-bg  flex justify-center items-center">
@@ -43,13 +45,16 @@ export default function Auth() {
             <p className="text-sm text-slate-400">Forgot Password?</p>
           </div>
           <button
-            disabled={isLoading}
             className=" bg-cyan-700 text-white rounded-3xl px-4 py-3 mt-2"
             type="submit"
           >
-            {isLoading ? "Loading" : "Login"}
+            Login
           </button>
-          <a href="" className="text-md text-cyan-500 m-auto">
+          <a
+            href=""
+            className="text-md text-cyan-500 m-auto"
+            onClick={handleSubmit(signup)}
+          >
             New around here? Sign up now!
           </a>
         </form>
