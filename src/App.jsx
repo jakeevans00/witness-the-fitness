@@ -8,7 +8,7 @@ import Dashboard from "./pages/Dashboard";
 import Overview from "./pages/Overview";
 import Workout from "./pages/Workout";
 import Progress from "./pages/Progress";
-import WorkoutForm from "./components/WorkoutForm";
+import WorkoutDetails from "./components/WorkoutDetails";
 
 function App() {
   return (
@@ -24,7 +24,7 @@ function App() {
         >
           <Route path="" index element={<Overview />} />
           <Route path="workout" element={<Workout />} />
-          <Route path=":workoutId" element={<WorkoutForm />} />
+          <Route path="workout/:workoutId" element={<WorkoutDetails />} />
           <Route path="progress" element={<Progress />} />
           <Route path="meals" element={<h1>Meals... to be continued 🍔</h1>} />
         </Route>

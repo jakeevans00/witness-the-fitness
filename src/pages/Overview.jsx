@@ -7,8 +7,16 @@ import { NavLink } from "react-router-dom";
 
 export default function Overview() {
   const [modalOpen, setModalOpen] = useState(false);
+  const [content, setContent] = useState({
+    title: "Add meal",
+    description: "Use our API to get nutrional info",
+  }); // [content, setContent
 
   const toggleModal = () => {
+    setContent({
+      title: "Add Weight",
+      description: "Keep up the good work!",
+    });
     setModalOpen(!modalOpen);
   };
 
@@ -32,26 +40,34 @@ export default function Overview() {
               className="bg-indigo-500 w-full rounded-xl py-4 px-6 text-white cursor-pointer"
               to="/workout"
             >
-              <h5 className="font-bold">Workout</h5>
+              <h5 className="font-bold mb-2">Workout</h5>
+              <p>🏋️ 45m Remaining</p>
             </NavLink>
-            <div
+            <NavLink
               className="bg-cyan-500 w-full rounded-xl py-4 px-6 text-white cursor-pointer"
-              onClick={toggleModal}
+              to="/meals"
             >
-              <h5 className="font-bold">Calories</h5>
-            </div>
+              <h5 className="font-bold mb-2">Macros</h5>
+              <p>🥩 50g Remaining</p>
+              <p>🍝 25g Remaining</p>
+              <p>🧈 4g Remaining</p>
+            </NavLink>
             <div
               className="bg-teal-500 w-full rounded-xl py-4 px-6 text-white cursor-pointer"
               onClick={toggleModal}
             >
-              <h5 className="font-bold">Weight</h5>
+              <h5 className="font-bold mb-2">Weight</h5>
+              <p>📝 Click to record </p>
             </div>
           </div>
-          {modalOpen && <Modal toggle={toggleModal} />}
+          {modalOpen && <Modal toggle={toggleModal} content={content} />}
           <div className="flex flex-col gap-4">
             <div className="flex justify-between ">
               <h1 className="inline text-xl text-gray-700">Daily Macros</h1>
-              <button className="bg-orange-500 py-1 px-2 rounded-lg text-white">
+              <button
+                className="bg-orange-500 py-1 px-2 rounded-lg text-white"
+                onClick={toggleModal}
+              >
                 Add Meal
               </button>
             </div>

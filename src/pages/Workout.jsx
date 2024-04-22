@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export default function Workout() {
   return (
@@ -12,10 +12,12 @@ export default function Workout() {
             <p>Pick up where you left off</p>
           </div>
           <div className="flex gap-4">
-            <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-              <a href="#">
-                <img className="rounded-t-lg" src="/climb2.jpg" alt="" />
-              </a>
+            <NavLink
+              className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+              to="/workout/1"
+            >
+              <img className="rounded-t-lg" src="/climb2.jpg" alt="" />
+
               <div className="p-5">
                 <a href="#">
                   <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
@@ -27,7 +29,7 @@ export default function Workout() {
                   moonboard.
                 </p>
               </div>
-            </div>
+            </NavLink>
             <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
               <a href="#">
                 <img className="rounded-t-lg" src="/lift.jpg" alt="" />
@@ -60,12 +62,12 @@ export default function Workout() {
             </div>
           </div>
           <div className="flex justify-center">
-            <Link
+            <NavLink
               to="/dashboard/1"
               className="cursor-pointer bg-gradient-to-r from-orange-500 to-red-300 rounded-xl py-8 px-6 text-white w-1/3 text-center font-bold"
             >
               Start a Workout
-            </Link>
+            </NavLink>
           </div>
           <div className="flex">
             <div className="w-1/2">

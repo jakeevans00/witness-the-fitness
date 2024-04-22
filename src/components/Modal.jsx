@@ -1,6 +1,27 @@
+import pb from "../lib/pocketbase";
 import PropTypes from "prop-types";
 
-export default function Modal({ toggle }) {
+export default function Modal({ toggle, content }) {
+  const { title } = content;
+  async function submit(e) {
+    e.preventDefault();
+    // const name = e.target.name.value;
+    const weight = e.target.weight.value;
+    // const category = e.target.category.value;
+    // const description = e.target.description.value;
+
+    // console.log(name, weight, category, description);
+    console.log(weight);
+    console.log(pb.authStore.model.id);
+    const data = {
+      field: pb.authStore.model.id,
+      weight: weight,
+    };
+
+    const record = await pb.collection("recorded_weight").create(data);
+    toggle();
+  }
+
   return (
     <>
       <div
@@ -15,7 +36,7 @@ export default function Modal({ toggle }) {
             {/* Modal header */}
             <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                Create New Product
+                {title}
               </h3>
               <button
                 onClick={toggle}
@@ -41,9 +62,9 @@ export default function Modal({ toggle }) {
               </button>
             </div>
             {/* Modal body */}
-            <form className="p-4 md:p-5">
+            <form className="p-4 md:p-5" onSubmit={submit}>
               <div className="grid gap-4 mb-4 grid-cols-2">
-                <div className="col-span-2">
+                {/* <div className="col-span-2">
                   <label
                     htmlFor="name"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -58,24 +79,24 @@ export default function Modal({ toggle }) {
                     placeholder="Type product name"
                     required
                   />
-                </div>
+                </div> */}
                 <div className="col-span-2 sm:col-span-1">
                   <label
-                    htmlFor="price"
+                    htmlFor="weight"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
-                    Price
+                    Weight
                   </label>
                   <input
                     type="number"
-                    name="price"
+                    name="weight"
                     id="price"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                    placeholder="$2999"
+                    placeholder="135"
                     required
                   />
                 </div>
-                <div className="col-span-2 sm:col-span-1">
+                {/* <div className="col-span-2 sm:col-span-1">
                   <label
                     htmlFor="category"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -92,8 +113,8 @@ export default function Modal({ toggle }) {
                     <option value="GA">Gaming/Console</option>
                     <option value="PH">Phones</option>
                   </select>
-                </div>
-                <div className="col-span-2">
+                </div> */}
+                {/* <div className="col-span-2">
                   <label
                     htmlFor="description"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -106,7 +127,7 @@ export default function Modal({ toggle }) {
                     className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Write product description here"
                   ></textarea>
-                </div>
+                </div> */}
               </div>
               <button
                 type="submit"
@@ -124,7 +145,7 @@ export default function Modal({ toggle }) {
                     clipRule="evenodd"
                   ></path>
                 </svg>
-                Add new product
+                Add Daily Weight
               </button>
             </form>
           </div>
@@ -136,4 +157,5 @@ export default function Modal({ toggle }) {
 
 Modal.propTypes = {
   toggle: PropTypes.func.isRequired,
+  content: PropTypes.object.isRequired,
 };

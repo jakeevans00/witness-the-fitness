@@ -33,8 +33,6 @@ Unfortuantely, the service is not super well-documented and will take a bit more
 
 **_Next Steps_**
 
-- add weight daily
-- visualize weight gain/loss
 - pull workouts from database
 - get workout info
 
@@ -43,3 +41,5 @@ Unfortuantely, the service is not super well-documented and will take a bit more
 - Visualize exercise progress
 - Add BMI calculations & make sign up more personalized
 - Make radial progress bars for overview page (see if workout, calories, and weight has been completed)
+- Limit # of times you can add weight per day (to once)
+- Deploy to Pockethost
